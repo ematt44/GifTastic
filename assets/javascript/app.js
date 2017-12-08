@@ -96,7 +96,7 @@ $(document).ready(function () {
           $("#gifs").empty();
           
           var input = $("#gif-input").val();
-          var apiKey = "ncuShis3xZz2zQx406kYlQCJjqb2lzqH";
+          
   
           // Don't create button if the user enters a blank response
   
@@ -106,7 +106,7 @@ $(document).ready(function () {
   
           // Here I tried to set the new button to allow the user to return to it later
   
-          var newButton = $("<button/>").addClass("btn btn-info food").attr("data-name", input).text(input);
+          var newButton = $("<button/>").addClass("#gif-input").attr("data-name", input).text(input);
           console.log(input);
   
   
@@ -119,7 +119,7 @@ $(document).ready(function () {
           // Enter info again for the new values of the user entries to retrieve gifs
   
           // Set up divs and all html needed
-  
+          var apiKey = "ncuShis3xZz2zQx406kYlQCJjqb2lzqH";
           queryURL = "https://api.giphy.com/v1/gifs/search?api_key=" + apiKey + "&q=" + input + "&limit=10&offset=0&rating=G&lang=en";
   
   
@@ -134,45 +134,45 @@ $(document).ready(function () {
   
                   for (var i = 0; i < foodData.length; i++) {
   
-                      var foodDiv = $("<div/>");
+                      var newFoodDiv = $("<div/>");
   
                       var p = $("<p/>");
   
                       p.text(foodData[i].rating);
   
                       var foodImg = $("<img/>");
+                      
+                      foodImg.addClass("foodImage");
   
-                      foodImg.addClass("foodImg")
+                      foodImg.attr("src", foodData[i].images.fixed_height.url);
+                      
+                                          foodImg.attr("data-still", foodData[i].images.fixed_height_still.url)
+                      
+                                          foodImg.attr("data-animate", foodData[i].images.fixed_height.url).attr("data-state", "still");
+                      
+                                          newFoodDiv.append(p);
+                      
+                                          newFoodDiv.append(foodImg);
+                      
+                                          newFoodDiv.prependTo($("#gifs"));
+                                      }
   
-                      foodImg.attr("src", foodData[i].images.fixed_height_still.url);
-  
-                      foodImg.attr("data-still", foodData[i].images.fixed_height_still.url)
-  
-                      foodImg.attr("data-animate", foodData[i].images.fixed_height.url).attr("data-state", "still");
-  
-                      foodDiv.append(p);
-  
-                      foodDiv.append(foodImg);
-  
-                      foodDiv.prependTo($("#gifs"));
-                  }
-  
-                  $(".foodImage").on("click", function () {
-  
-                      var state = $(this).attr("data-state");
-                      console.log(state);
-  
-                      if (state == "still") {
-  
-                          $(this).attr("src", $(this).data("animate"));
-  
-                          $(this).attr("data-state", "animate");
-  
-                      } else {
-  
-                          $(this).attr("src", $(this).data("still"));
-  
-                          $(this).attr("data-state", "still");
+                                      $(".foodImage").on("click", function () {
+                                        
+                                                            var state = $(this).attr("data-state");
+                                                            console.log(this);
+                                        
+                                                            if (state == "still") {
+                                        
+                                                                $(this).attr("src", $(this).data("animate"));
+                                        
+                                                                $(this).attr("data-state", "animate");
+                                        
+                                                            } else {
+                                        
+                                                                $(this).attr("src", $(this).data("still"));
+                                        
+                                                                $(this).attr("data-state", "still");
                       }
                   });
               });
