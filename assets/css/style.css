@@ -1,0 +1,35 @@
+body {
+    background: lightblue;
+}
+
+
+#gifs {
+    float: right;
+    width: 50%;
+    margin-right: 50px;
+
+	
+}
+
+#food-gifs {
+    float: left;
+}
+
+button {
+    padding: 20px;
+    color: red;
+    background: yellow;
+}
+
+
+h4 {
+    font-size: 30px;
+    color: blue;
+}
+
+#gif-input {
+    padding: 20px;
+    font-size: 30px;
+    font-style: bold;
+}
+
